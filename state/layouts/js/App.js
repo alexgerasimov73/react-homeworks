@@ -4,13 +4,19 @@ const VIEW_LIST = "view_list";
 const VIEW_MODULE = "view_module";
 
 class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      icon: VIEW_MODULE
+    };
+  }
   render() {
     return (
       <div>
         <div className="toolbar">
           <IconSwitch
-            icon={VIEW_MODULE}
-            onSwitch={() => console.log("сменился тип вывода")} />
+            icon={this.state.icon}
+            onSwitch={() => this.changeDisplay()} />
         </div>
         {this.renderLayout(true)}
       </div>
@@ -18,7 +24,7 @@ class App extends React.Component {
   }
 
   renderLayout(cardView) {
-    if (cardView) {
+    if (this.state.icon === VIEW_MODULE) {
       return (
         <CardsView
           layout={this.props.layout}
@@ -36,12 +42,16 @@ class App extends React.Component {
         img: product.img,
         price: `$${product.price}`
       };
-      if (cardView) {
+      if (this.state.icon === VIEW_MODULE) {
         return (
           <ShopCard {...cardProps}/>
         );
       }
       return (<ShopItem {...cardProps}/>)
     });
+  }
+  
+  changeDisplay() {
+    this.state.icon === VIEW_MODULE ? this.setState({icon: VIEW_LIST}) : this.setState({icon: VIEW_MODULE});
   }
 }
