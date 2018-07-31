@@ -42,14 +42,39 @@ const Form = (props) => {
   )
 };
 
+const emailPropType = (props, propName, componentName) => {
+  const email = props[propName];
+  const isEmail = (typeof email === 'string') && /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
+  if(!isEmail) {
+    return new Error(`Неверный параметр ${propName} в компоненте ${componentName}: параметр должен быть адресом электронной почты`);
+  }
+  return null;
+}
+ const createChainableTypeChecker = (validate) => {
+  const checkType = (isRequired, props, propName, componentName) => {
+    if (props[propName] === null) {
+      if (isRequired) {
+        return new Error(`Обязательный атрибут ${propName} не был передан компоненту ${componentName}`);
+      }
+      return null;
+    } else {
+      return validate(props, propName, componentName);
+    }
+  }
+  let chainedCheckType = checkType.bind(null, false);
+  chainedCheckType.isRequired = checkType.bind(null, true);
+  return chainedCheckType;
+}
+ const emailPropTypeChecker = createChainableTypeChecker(emailPropType);
+
 Form.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
 
-  email: PropTypes.number,
+  email: emailPropTypeChecker.isRequired,
   first_name: PropTypes.string,
   last_name: PropTypes.string,
-  age: PropTypes.integer,
+  age: PropTypes.number.isRequired,
   nickname: PropTypes.string,
-  is_married: PropTypes.integer
+  is_married: PropTypes.bool
 };
