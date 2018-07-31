@@ -12,7 +12,7 @@ const Form = (props) => {
                    value={props.first_name}/>
         <TextInput label="Фамилия" type="text" name="last_name" onChange={props.handleChange}
                    value={props.last_name}/>
-        <DateInput label="День Рождения" name="birthday" onChange={props.handleChange} value={props.birthday}/>
+        <DateInput label="День Рождения" name="birthday" onChange={props.handleChange}/>
         <TextInput label="Пароль" type="password" name="password" onChange={props.handleChange}
                    value={props.password}/>
         <RadioGroup label="Пол" name="sex" onChange={props.handleChange} value={props.sex} list={['муж', 'жен']}/>

@@ -9,3 +9,28 @@ const DateInput = props => {
     </div>
   )
 };
+
+DateInput.defaultProps = {
+  value: currentDate()
+}
+
+DateInput.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.oneOf(['birthday']),
+  onChange: PropTypes.func,
+  value: (props, propName, componentName) => {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(props[propName])) return null;
+    return new Error("Неверный формат");
+  }
+}
+
+function currentDate() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const day = date.getDate();
+  let month = date.getMonth() + 1;
+  if (month < 10) {
+    month = "0" + month;
+  }
+  return `${year}-${month}-${day}`;
+}
