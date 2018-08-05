@@ -1,4 +1,5 @@
 const Book = ({book, filterBooks}) => {
+    let key = 0;
     let backgroundImage = book.imageLinks && `url(${book.imageLinks.thumbnail})`;
     let style = {
         width: 128,
@@ -13,7 +14,7 @@ const Book = ({book, filterBooks}) => {
             <div className="book-title">{book.title}</div>
             {book.authors && 
                 <div className="book-authors">
-                    {book.authors.map(author => <button value={author} onClick={() => filterBooks(author)} className="book-author">{author}</button>)}
+                    {book.authors.map(author => <button key={key++} value={author} onClick={() => filterBooks(author)} className="book-author">{author}</button>)}
                 </div>
             }
         </div>
