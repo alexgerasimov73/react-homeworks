@@ -1,6 +1,6 @@
 "use strict";
 
-const FeedbackForm = ({data, onSubmit}) => {
+const FeedbackForm = ({ data, onSubmit }) => {
     let form;
     function sendForm (event) {
         event.preventDefault();
@@ -10,7 +10,6 @@ const FeedbackForm = ({data, onSubmit}) => {
             const field = selectField(key);
             sendData += `${field}: ${value}; `
         }
-        //console.log(sendData);
         onSubmit(sendData);
     }
     return (
@@ -52,18 +51,24 @@ const SalutationField = ({salutation}) => {
     );
 }
 
-const SalutationInput = ({value, salutation, id}) => {
+const SalutationInput = ({ value, salutation, id }) => {
     if (value === salutation) {
-        return (<input defaultChecked className="contact-form__input contact-form__input--radio" id={id} name="salutation" type="radio" value={value}/>)
+        return (
+            <input defaultChecked className="contact-form__input contact-form__input--radio" id={id} name="salutation" type="radio" value={value} />
+            );
     }
-    return (<input className="contact-form__input contact-form__input--radio" id={id} name="salutation" type="radio" value={value}/>)
+    return (
+        <input className="contact-form__input contact-form__input--radio" id={id} name="salutation" type="radio" value={value} />
+        );
 }
 
-const SalutationLabel = ({value, id}) => {
-    return (<label className="contact-form__label contact-form__label--radio" htmlFor={id}>{value}</label>)
+const SalutationLabel = ({ value, id }) => {
+    return (
+        <label className="contact-form__label contact-form__label--radio" htmlFor={id}>{value}</label>
+        );
 }
 
-const NameField = ({name}) => {
+const NameField = ({ name }) => {
     return (
         <div className="contact-form__input-group">
             <label className="contact-form__label" htmlFor="name">Имя</label>
@@ -72,7 +77,7 @@ const NameField = ({name}) => {
     );
 }
 
-const EmailField = ({email}) => {
+const EmailField = ({ email }) => {
     return (
         <div className="contact-form__input-group">
             <label className="contact-form__label" htmlFor="email">Адрес электронной почты</label>
@@ -81,7 +86,7 @@ const EmailField = ({email}) => {
     );
 }
 
-const QuestionField = ({question}) => {
+const QuestionField = ({ question }) => {
     return (
         <div className="contact-form__input-group">
             <label className="contact-form__label" htmlFor="subject">Чем мы можем помочь?</label>
@@ -93,7 +98,7 @@ const QuestionField = ({question}) => {
     );
 }
 
-const MessageField = ({message}) => {
+const MessageField = ({ message }) => {
     return (
         <div className="contact-form__input-group">
             <label className="contact-form__label" htmlFor="message">Ваше сообщение</label>
@@ -103,7 +108,7 @@ const MessageField = ({message}) => {
     );
 }
 
-const BonusField = ({bonuses}) => {
+const BonusField = ({ bonuses }) => {
     return (
         <div className="contact-form__input-group">
             <p className="contact-form__label--checkbox-group">Хочу получить:</p>
@@ -115,16 +120,22 @@ const BonusField = ({bonuses}) => {
     );
 }
 
-const BonusInput = ({value, id, bonuses}) => {
-    if(bonuses) {
+const BonusInput = ({ value, id, bonuses }) => {
+    if (bonuses) {
         const filter = bonuses.filter(bonus => bonus === value);
         if(filter.length === 1) {
-            return (<input defaultChecked className="contact-form__input contact-form__input--checkbox" id={id} name="snacks" type="checkbox" value={value}/>)
+            return (
+                <input defaultChecked className="contact-form__input contact-form__input--checkbox" id={id} name="snacks" type="checkbox" value={value} />
+                );
         }  
     }
-    return (<input className="contact-form__input contact-form__input--checkbox" id={id} name="snacks" type="checkbox" value={value}/>)
+    return (
+        <input className="contact-form__input contact-form__input--checkbox" id={id} name="snacks" type="checkbox" value={value} />
+        );
 }
 
-const BonusLabel = ({value, id}) => {
-    return (<label className="contact-form__label contact-form__label--checkbox" htmlFor={id}>{value}</label>)
+const BonusLabel = ({ value, id }) => {
+    return (
+        <label className="contact-form__label contact-form__label--checkbox" htmlFor={id}>{value}</label>
+        );
 }
